@@ -1,0 +1,186 @@
+Nmap:
+----
+Nmap is a powerful network scanning tool used for host discovery, port scanning, and service enumeration.
+It helps uncover network topology, open ports, and running services, aiding in vulnerability assessment and network security audits.
+
+INSTALLATION:
+------------
+
+WINDOWS:
+
++ Download it from "https://nmap.org/download"
++ Run the installer and follow the on-screen instructions to complete the installation.
+
+LINUX:
+
++ If you're using Kali Linux, Nmap is pre-installed by default.
++ You can verify that Nmap is installed on your Kali Linux system by opening a terminal and running:
+		- "nmap --version"
+
+IMPORTANT COMMANDS:
+-------------------
+
+1. Target Specification:
+________________________
+
+Description: Input hosts/networks from a file or exclude specified hosts/networks.
+
+Command:
+		-iL <inputfilename>
+		--exclude <host1[,host2][,host3],...>
+		--excludefile <exclude_file>
+Example:
+		nmap -iL targets.txt
+		nmap --exclude 192.168.1.1,192.168.1.2
+		nmap --excludefile excluded_hosts.txt
+Explanation:
+		-iL specifies a file containing a list of hosts/networks to scan.
+		--exclude excludes specified hosts/networks from the scan.
+		--excludefile specifies a file containing a list of hosts/networks to exclude from the scan.
+
+2. Host Discovery:
+__________________
+
+Description: List, ping, or skip host discovery; use system DNS resolver; trace route to hosts.
+
+Command:
+		-sL
+		-sn
+		-Pn
+		--system-dns
+		--traceroute
+Example:
+		nmap -sL 192.168.1.0/24
+		nmap -sn 192.168.1.0/24
+		nmap -Pn 192.168.1.100
+		nmap --system-dns 192.168.1.100
+		nmap --traceroute 192.168.1.100
+Explanation:
+		-sL lists targets to scan.
+		-sn performs a ping scan, disabling port scan.
+		-Pn treats all hosts as online, skipping host discovery.
+		--system-dns uses the OS's DNS resolver.
+		--traceroute traces the route to each host.
+
+3. Scan Techniques:
+___________________
+
+Description: Perform various scan techniques, including TCP SYN/Connect()/ACK/Window/Maimon, UDP, Null, FIN, Xmas, and Idle scans.
+
+Command:
+		-sS/sT/sA/sW/sM
+		-sU
+		-sN/sF/sX
+		-sI <zombie_host[:probeport]>
+Example:
+		nmap -sS 192.168.1.100
+		nmap -sU 192.168.1.100
+		nmap -sI 192.168.1.1:80 192.168.1.100
+Explanation:
+		These commands specify different TCP and UDP scan techniques, including SYN, Connect(), ACK, Window, Maimon, Null, FIN, Xmas, and Idle scans.
+
+4. Service/Version Detection:
+____________________________
+
+Description: Probe open ports to determine service/version info.
+
+Command:
+		-sV: Probe open ports to determine service/version info.
+		--version-intensity <level>: Set from 0 (light) to 9 (try all probes).
+		--version-all: Try every single probe (intensity 9).
+		--version-trace: Show detailed version scan activity (for debugging).
+Example:
+		nmap -sV 192.168.1.100
+		nmap --version-intensity 5 192.168.1.100
+		nmap --version-all 192.168.1.100
+		nmap --version-trace 192.168.1.100
+Explanation:
+		These commands allow Nmap to probe open ports to determine the service and version running on each port.
+		The --version-intensity option allows setting the intensity level for version detection, with 0 being light and 9 trying all probes.
+		--version-all tries every single probe available for version detection at intensity level 9.
+		--version-trace shows detailed version scan activity, useful for debugging purposes.
+
+4. OS Detection:
+________________
+
+Description: Enable OS detection.
+
+Command:
+		-O
+Example:
+		nmap -O 192.168.1.100
+Explanation:
+		This command enables OS detection to identify the operating system running on the target.
+
+
+5. Timing and Performance:
+_________________________
+
+Description: Set timing template (higher is faster).
+
+Command:
+		-T<0-5>
+Example:
+		nmap -O 192.168.1.100
+Explanation:
+		This command sets the timing template for the scan, with higher numbers indicating faster scans.
+
+6. Output:
+__________
+
+Description: Output scan in various formats.
+
+Command:
+		-oN/-oX/-oS/-oG <file>
+		-oA <basename>
+Example:
+		nmap -oN scan_results.txt 192.168.1.100
+Explanation:
+		These commands specify the output format and filename for the scan results.
+
+7. Miscellaneous:
+_________________
+
++ Description: Enable IPv6 scanning.
+
+Command:
+		-6
+Example:
+		nmap -6 ::1
+Explanation:
+		This command enables IPv6 scanning for the target.
+
+---------------------------------------
+
++ Description: Enable OS detection, version detection, script scanning, and traceroute.
+
+Command:
+		-A
+Example:
+		nmap -A 192.168.1.100
+Explanation:
+		This command enables comprehensive scanning by enabling OS detection, version detection, script scanning, and traceroute.
+
+--------------------------------------
+
++ Description: Print version number.
+
+Command:
+		-V
+Example:
+		nmap -V
+Explanation:
+		This command prints the version number of Nmap.
+
+-------------------------------------
+
++ Description: Print help summary page.
+
+Command:
+		-h
+Example:
+		nmap -h
+Explanation:
+		This command prints a summary of Nmap's help page.
+
+------------------------------------
